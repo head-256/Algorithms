@@ -40,19 +40,19 @@ def preorder(root):
     if root:
         yield root.key
 
-        for l_child in inorder(root.left):
+        for l_child in preorder(root.left):
             yield l_child
 
-        for r_child in inorder(root.right):
+        for r_child in preorder(root.right):
             yield r_child
 
 
 def postorder(root):
     if root:
-        for l_child in inorder(root.left):
+        for l_child in postorder(root.left):
             yield l_child
 
-        for r_child in inorder(root.right):
+        for r_child in postorder(root.right):
             yield r_child
 
         yield root.key
@@ -71,6 +71,13 @@ def levelorder(root):
                 q.append(temp.left)
             if temp.right is not None:
                 q.append(temp.right)
+
+
+def print_indented(root, level=0):
+    if root:
+        print("  " * level * 2 + str(root.key))
+        print_indented(root.right, level + 1)
+        print_indented(root.left, level + 1)
 
 
 class Color(Enum):
@@ -191,3 +198,5 @@ if __name__ == '__main__':
     print(list(pre_order))
     print(list(post_order))
     print(list(level_order))
+
+    print_indented(tree.root)
