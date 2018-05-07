@@ -26,34 +26,46 @@ def search(root, key):
 
 
 def inorder(root):
-    if root is not None:
-        inorder(root.left)
-        print(root.key, end=' ')
-        inorder(root.right)
+    if root:
+        for l_child in inorder(root.left):
+            yield l_child
+
+        yield root.key
+
+        for r_child in inorder(root.right):
+            yield r_child
 
 
 def preorder(root):
-    if root is not None:
-        print(root.key, end=' ')
-        preorder(root.left)
-        preorder(root.right)
+    if root:
+        yield root.key
+
+        for l_child in inorder(root.left):
+            yield l_child
+
+        for r_child in inorder(root.right):
+            yield r_child
 
 
 def postorder(root):
-    if root is not None:
-        postorder(root.left)
-        postorder(root.right)
-        print(root.key, end=' ')
+    if root:
+        for l_child in inorder(root.left):
+            yield l_child
+
+        for r_child in inorder(root.right):
+            yield r_child
+
+        yield root.key
 
 
 def levelorder(root):
-    if root is not None:
+    if root:
         q = deque()
         q.append(root)
 
         while len(q) > 0:
             temp = q.popleft()
-            print(temp.key, end=' ')
+            yield temp.key
 
             if temp.left is not None:
                 q.append(temp.left)
@@ -169,10 +181,13 @@ if __name__ == '__main__':
     tree.insert(17)
     tree.insert(13)
     print(search(tree.root, 11).left)
-    inorder(tree.root)
-    print()
-    preorder(tree.root)
-    print()
-    postorder(tree.root)
-    print()
-    levelorder(tree.root)
+
+    in_order = inorder(tree.root)
+    pre_order = preorder(tree.root)
+    post_order = postorder(tree.root)
+    level_order = levelorder(tree.root)
+
+    print(list(in_order))
+    print(list(pre_order))
+    print(list(post_order))
+    print(list(level_order))
