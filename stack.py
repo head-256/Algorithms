@@ -12,6 +12,9 @@ class Stack:
     def __init__(self):
         self.head = None
 
+    def is_empty(self):
+        return not self.head
+
     def push(self, data):
         node = Node(data)
         node.next = self.head
@@ -23,6 +26,9 @@ class Stack:
             self.head = self.head.next
             return popped
 
+    def peek(self):
+        return self.head.data
+
 
 if __name__ == '__main__':
     st = Stack()
@@ -33,3 +39,4 @@ if __name__ == '__main__':
     st.push(2)
     print(st.pop())
     print(st.pop())
+    print(st.peek())
