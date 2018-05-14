@@ -187,7 +187,6 @@ if __name__ == '__main__':
     tree.insert(8)
     tree.insert(17)
     tree.insert(13)
-    print(search(tree.root, 11).left)
 
     in_order = inorder(tree.root)
     pre_order = preorder(tree.root)
