@@ -18,7 +18,6 @@ class DoublyLinkedList:
         node = Node(data)
         if not self.head:
             self.head = self.tail = node
-            node.prev = node.next = None
         else:
             self.insert_before(self.head, node.data)
         return node
@@ -26,7 +25,7 @@ class DoublyLinkedList:
     def append(self, data):
         node = Node(data)
         if not self.tail:
-            self.push(node)
+            self.push(node.data)
         else:
             self.insert_after(self.tail, node.data)
         return node
@@ -35,7 +34,6 @@ class DoublyLinkedList:
         node = Node(data)
         node.prev = prev_node
         if not prev_node.next:
-            prev_node.next = None
             self.tail = node
         else:
             node.next = prev_node.next
@@ -47,9 +45,7 @@ class DoublyLinkedList:
         node = Node(data)
         node.next = next_node
         if not next_node.prev:
-            node.prev = None
             self.head = node
-            node.next.prev = node
         else:
             node.prev = next_node.prev
             next_node.prev.next = node
@@ -95,3 +91,6 @@ if __name__ == '__main__':
     dll.print_forwards()
     dll.remove(dll.tail)
     print(dll.search(13))
+    dll2 = DoublyLinkedList()
+    dll2.append(2)
+    dll2.print_forwards()
