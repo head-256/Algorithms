@@ -14,9 +14,8 @@ class Query:
 def preprocess(A):
     global lookup
     n = len(A)
-    l = int(n * math.log2(n))
 
-    lookup = [[0]*l for _ in range(l)]
+    lookup = [[0]*(int(math.log2(n))+1) for _ in range(n)]
 
     for i in range(n):
         lookup[i][0] = i
@@ -53,5 +52,5 @@ def RMQ(A, Q):
 
 if __name__ == '__main__':
     A = [7, 2, 3, 0, 5, 10, 3, 12, 18]
-    Q = [Query(0, 4), Query(4, 5), Query(5, 8)]
+    Q = [Query(0, 4), Query(4, 5), Query(5, 8), Query(2, 7)]
     RMQ(A, Q)
